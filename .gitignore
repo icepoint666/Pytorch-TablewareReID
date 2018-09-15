@@ -1,5 +1,6 @@
-datas/datas
-datas/transdatas
+datas/datas/*
+datas/transdatas/*
 datas/bow_cls.txt
-model/pytorch-ckpt
+model/pytorch-ckpt/*
 model/resnet50-19c8e357.pth
+.idea
