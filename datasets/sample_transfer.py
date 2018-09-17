@@ -2,7 +2,7 @@ import os
 import cv2
 
 if __name__ == "__main__":
-    rootdir = "/home/icepoint/Downloads/data/2018043000/样本/样本"
+    rootdir = "/home/ubuntu/Program/Tableware/data/2018043000/样本/样本"
     train_save_dir = "../datas/dishes_dataset/train/"
     test_save_dir = "../datas/dishes_dataset/test/"
     class_list = os.listdir(rootdir)

@@ -13,7 +13,6 @@ from torch.utils.data import DataLoader
 
 from datasets.data_manager import Tableware
 from datasets.data_loader import ImageData
-from datasets.samplers import RandomIdentitySampler
 from models import get_baseline_model
 from evaluator import Evaluator
 from utils.meters import AverageMeter
@@ -81,13 +80,13 @@ def train(model, optimizer, criterion, epoch, print_freq, data_loader):
             print('Epoch: [{}][{}/{}]\t'
                   'Batch Time {:.3f} ({:.3f})\t'
                     'Data Time {:.3f} ({:.3f})\t'
-                    'Loss {:.3f} ({:.3f})\t'
+                    'Loss {:.6f} ({:.6f})\t'
                       .format(epoch, i + 1, len(data_loader),
                               batch_time.val, batch_time.mean,
                               data_time.val, data_time.mean,
                               losses.val, losses.mean))
     param_group = optimizer.param_groups
-    print('Epoch: [{}]\tEpoch Time {:.3f} s\tLoss {:.3f}\t'
+    print('Epoch: [{}]\tEpoch Time {:.3f} s\tLoss {:.6f}\t'
               'Lr {:.2e}'
               .format(epoch, batch_time.sum, losses.mean, param_group[0]['lr']))
     print()
@@ -102,15 +101,15 @@ def trainer(data_pth):
     # optimization options
     optim = 'Adam'
     max_epoch = 1
-    train_batch = 8
-    test_batch = 32
+    train_batch = 64
+    test_batch = 64
     lr = 0.1
     step_size = 40
     gamma = 0.1
     weight_decay = 5e-4
     momentum = 0.9
     test_margin = 10.0
-    margin = 0.3
+    margin = 1.0
     num_instances = 4
     num_gpu = 1
 
@@ -119,8 +118,8 @@ def trainer(data_pth):
     pretrained_model = 'model/resnet50-19c8e357.pth'
 
     # miscs
-    print_freq = 2
-    eval_step = 50
+    print_freq = 20
+    eval_step = 1
     save_dir = 'model/pytorch-ckpt/'
     workers = 1
     start_epoch = 0
@@ -217,4 +216,4 @@ def trainer(data_pth):
         'Best accuracy {:.1%}, achieved at epoch {}'.format(best_acc, best_epoch))
 
 if __name__ == "__main__":
-    trainer('/home/icepoint/reid_tableware/datas/transdatas/')
+    trainer('/home/ubuntu/Program/Tableware/reid_tableware/datas/dishes_dataset/')

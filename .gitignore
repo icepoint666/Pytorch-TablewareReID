@@ -1,8 +1,10 @@
 datas/datas/*
-datas/transdatas/*
-datas/dishes_dataset/*
+datas/transdatas/train/*
+datas/transdatas/test/*
+datas/dishes_dataset/train/*
+datas/dishes_dataset/test/*
 datas/bow_cls.txt
-model/pytorch-ckpt/*
+model/pytorch-ckpt/*.tar
 model/resnet50-19c8e357.pth
 .idea
 __pycache__
