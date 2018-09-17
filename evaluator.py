@@ -21,10 +21,10 @@ class Evaluator(object):
                 feature = self.model(data)
             feature.cpu()
             distmat = loss.euclidean_dist(feature, feature).cpu()
-            print(distmat[0])
-            print(pids)
-            print(distmat.size())
-            print(pids.size())
+            # print(distmat[0])
+            # print(pids)
+            # print(distmat.size())
+            # print(pids.size())
             for i, label_i in enumerate(pids):
                 for j, label_j in enumerate(pids):
                     if distmat[i,j] <= margin and label_i == label_j:
