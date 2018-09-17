@@ -1,6 +1,11 @@
 datas/datas/*
 datas/transdatas/*
+datas/dishes_dataset/*
 datas/bow_cls.txt
 model/pytorch-ckpt/*
 model/resnet50-19c8e357.pth
 .idea
+__pycache__
+models/__pycache__
+utils/__pycache__
+datasets/__pycache__
