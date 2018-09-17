@@ -92,7 +92,7 @@ def train(model, optimizer, criterion, epoch, print_freq, data_loader):
               .format(epoch, batch_time.sum, losses.mean, param_group[0]['lr']))
     print()
 
-def trainer():
+def trainer(data_pth):
     seed = 0
 
     # dataset options
@@ -109,6 +109,7 @@ def trainer():
     gamma = 0.1
     weight_decay = 5e-4
     momentum = 0.9
+    test_margin = 10.0
     margin = 0.3
     num_instances = 4
     num_gpu = 1
@@ -136,7 +137,7 @@ def trainer():
     pin_memory = True if use_gpu else False
 
     print('initializing dataset {}'.format('Tableware'))
-    dataset = Tableware('/home/icepoint/reid_tableware/datas/transdatas/')
+    dataset = Tableware(data_pth)
 
     trainloader = DataLoader(
         ImageData(dataset.train, TrainTransform(height, width)),
@@ -197,7 +198,7 @@ def trainer():
 
         # skip if not save model
         if eval_step > 0 and (epoch + 1) % eval_step == 0 or (epoch + 1) == max_epoch:
-            acc = evaluator.evaluate(testloader, 10.0)
+            acc = evaluator.evaluate(testloader, test_margin)
             is_best = acc > best_acc
             if is_best:
                 best_acc = acc
@@ -216,4 +217,4 @@ def trainer():
         'Best accuracy {:.1%}, achieved at epoch {}'.format(best_acc, best_epoch))
 
 if __name__ == "__main__":
-    trainer()
+    trainer('/home/icepoint/reid_tableware/datas/transdatas/')
